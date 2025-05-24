@@ -22,7 +22,7 @@ CLASS_NAMES = [
 @st.cache_resource
 def download_and_load_model():
     if not os.path.exists(MODEL_PATH):
-        with st.spinner("Downloading model..."):
+        with st.spinner("📥 Downloading model..."):
             urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
     model = load_model(MODEL_PATH)
     return model
@@ -32,19 +32,40 @@ model = download_and_load_model()
 # -- UI Design -- 
 st.markdown("""
     <style>
+        h1 {
+            background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
         .stButton>button {
             background-color: #28a745;
             color: white;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
         }
         .stButton>button:hover {
             background-color: #218838;
         }
+        .uploaded-img {
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            margin-bottom: 1rem;
+        }
+        .prediction-box {
+            background-color: #eafaf1;
+            padding: 1rem;
+            border-left: 5px solid #28a745;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
         .footer {
-            margin-top: 40px;
+            margin-top: 50px;
             text-align: center;
-            color: #888;
+            color: #aaa;
             font-size: 0.85rem;
         }
     </style>
@@ -54,7 +75,7 @@ st.markdown("""
 st.title("Mango Leaf Disease Identifier 🍃")
 st.markdown("Upload an image of a mango leaf to identify the disease.")
 
-uploaded_file = st.file_uploader("📤 Upload a leaf image", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("📷 Upload a leaf image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     img = Image.open(uploaded_file).convert('RGB')
@@ -66,10 +87,14 @@ if uploaded_file is not None:
     img_array = np.expand_dims(img_array, axis=0)
 
     # Prediction
-    with st.spinner("🔍 Identifying Leaf State..."):
+    with st.spinner("🔍 Identifying Leaf Disease..."):
         prediction = model.predict(img_array)[0]
         predicted_class = CLASS_NAMES[np.argmax(prediction)]
         confidence = np.max(prediction) * 100
 
-    st.success(f"🎯 **Prediction:** `{predicted_class}`")
-    st.metric("🔒 Confidence", f"{confidence:.2f} %")
+     st.markdown(f"""
+        <div class="prediction-box">
+            ✅ <strong>Prediction:</strong> {predicted_class}<br>
+            📊 <strong>Confidence:</strong> {confidence:.2f}%
+        </div>
+    """, unsafe_allow_html=True)
