@@ -9,10 +9,13 @@ from PIL import Image
 st.set_page_config(page_title="Mango Leaf Disease Classifier", layout="centered")
 
 # -- Configuration --
-MODEL_URL = "https://drive.google.com/uc?export=download&id=1Re5Xxbp_PF6U6tBrBpqFnzo3I3ha5gyI"
+MODEL_URL = "https://huggingface.co/datasets/Nulily/mangoleafdisease_classification_mobilenetv2_95pct/resolve/main/mangoleafdisease_classification_mobilenetv2_95pct.h5"
 MODEL_PATH = "mangoleafdisease_classification_mobilenetv2_95pct.h5"
-IMG_SIZE = (224, 224)  # Input size for MobileNetV2
-CLASS_NAMES = ['Anthracnose', 'Bacterial Canker', 'Cutting Weevil', 'Die Back', 'Gall Midge', 'Powdery Mildew', 'Sooty Mould', 'Healthy' ]  # Update if you used different labels
+IMG_SIZE = (224, 224)
+CLASS_NAMES = [
+    'Anthracnose', 'Bacterial Canker', 'Cutting Weevil', 'Die Back',
+    'Gall Midge', 'Powdery Mildew', 'Sooty Mould', 'Healthy'
+]
 
 # -- Model loader with caching --
 @st.cache_resource
@@ -26,8 +29,8 @@ def download_and_load_model():
 model = download_and_load_model()
 
 # -- Streamlit UI --
-st.title("Mango Leaf Disease")
-st.write("Upload an image to identify the Leaf Disease.")
+st.title("Mango Leaf Disease Classifier")
+st.write("Upload an image of a mango leaf to identify the disease (if any).")
 
 uploaded_file = st.file_uploader("Upload image here", type=["jpg", "jpeg", "png"])
 
@@ -39,7 +42,7 @@ if uploaded_file is not None:
     img_resized = img.resize(IMG_SIZE)
     img_array = image.img_to_array(img_resized)
     img_array = np.expand_dims(img_array, axis=0)
-    img_array /= 255.0
+    img_array = img_array / 255.0
 
     # Predict
     with st.spinner("Classifying..."):
