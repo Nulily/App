@@ -13,7 +13,7 @@ st.set_page_config(page_title="Cat vs Dog Classifier", layout="centered")
 # -- Constants --
 MODEL_URL = "https://huggingface.co/datasets/dnforimaco/cat-dog-classification/resolve/main/cat-dog_model.h5"
 MODEL_PATH = "cat-dog_model.h5"
-IMG_SIZE = (224, 224)  # Change if your model uses a different input size
+IMG_SIZE = (150, 150)  # Change if your model uses a different input size
 CLASS_NAMES = ['Cat', 'Dog']  # Assumes binary classification: 0 = Cat, 1 = Dog
 
 # -- Load Model with Caching --
