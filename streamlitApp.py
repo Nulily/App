@@ -14,7 +14,7 @@ MODEL_PATH = "mangoleafdisease_classification_mobilenetv2_95pct.h5"
 IMG_SIZE = (224, 224)
 CLASS_NAMES = [
     'Anthracnose', 'Bacterial Canker', 'Cutting Weevil', 'Die Back',
-    'Gall Midge', 'Powdery Mildew', 'Sooty Mould', 'Healthy'
+    'Gall Midge', 'Healthy', 'Powdery Mildew', 'Sooty Mould'
 ]
 
 # -- Model loader with caching --
@@ -29,8 +29,8 @@ def download_and_load_model():
 model = download_and_load_model()
 
 # -- Streamlit UI --
-st.title("Mango Leaf Disease Classifier")
-st.write("Upload an image of a mango leaf to identify the disease (if any).")
+st.title("Mango Leaf Disease Identifier")
+st.write("Upload an image of a mango leaf to identify the disease.")
 
 uploaded_file = st.file_uploader("Upload image here", type=["jpg", "jpeg", "png"])
 
@@ -45,7 +45,7 @@ if uploaded_file is not None:
     img_array = img_array / 255.0
 
     # Predict
-    with st.spinner("Classifying..."):
+    with st.spinner("Identifying Leaf State..."):
         prediction = model.predict(img_array)[0]
         predicted_class = CLASS_NAMES[np.argmax(prediction)]
         confidence = np.max(prediction) * 100
