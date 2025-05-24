@@ -1,7 +1,4 @@
 streamlit
 tensorflow
 numpy
-pillow
-matplotlib
-scikit-learn
-seaborn
+Pillow
