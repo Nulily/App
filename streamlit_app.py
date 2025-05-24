@@ -9,7 +9,7 @@ from PIL import Image
 st.set_page_config(page_title="Mango Leaf Disease Classifier", layout="centered")
 
 # -- Configuration --
-MODEL_URL = "https://drive.google.com/drive/u/0/folders/1cBsBzQbdIVNd2aas1poK0YLVVwJPWVgL"
+MODEL_URL = "https://drive.google.com/uc?export=download&id=1Re5Xxbp_PF6U6tBrBpqFnzo3I3ha5gyI"
 MODEL_PATH = "mangoleafdisease_classification_mobilenetv2_95pct.h5"
 IMG_SIZE = (224, 224)  # Input size for MobileNetV2
 CLASS_NAMES = ['Anthracnose', 'Bacterial Canker', 'Cutting Weevil', 'Die Back', 'Gall Midge', 'Powdery Mildew', 'Sooty Mould', 'Healthy' ]  # Update if you used different labels
