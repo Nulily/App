@@ -92,7 +92,7 @@ if uploaded_file is not None:
         predicted_class = CLASS_NAMES[np.argmax(prediction)]
         confidence = np.max(prediction) * 100
 
-      st.markdown(f"""
+    st.markdown(f"""
         <div class="prediction-box">
             ✅ <strong>Prediction:</strong> {predicted_class}<br>
             📊 <strong>Confidence:</strong> {confidence:.2f}%
