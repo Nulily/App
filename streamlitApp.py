@@ -29,7 +29,7 @@ def download_and_load_model():
 
 model = download_and_load_model()
 
-# -- UI Design -- 
+# -- UI Design --
 st.markdown("""
     <style>
         h1 {
@@ -56,7 +56,8 @@ st.markdown("""
             margin-bottom: 1rem;
         }
         .prediction-box {
-            background-color: #eafaf1;
+            background-color: #1e5128; /* darker green */
+            color: white;               /* white text */
             padding: 1rem;
             border-left: 5px solid #28a745;
             border-radius: 8px;
