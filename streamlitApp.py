@@ -93,8 +93,8 @@ if uploaded_file is not None:
         confidence = np.max(prediction) * 100
 
      st.markdown(f"""
-        <div class="prediction-box">
+     <div class="prediction-box">
             ✅ <strong>Prediction:</strong> {predicted_class}<br>
             📊 <strong>Confidence:</strong> {confidence:.2f}%
-        </div>
+         </div>
     """, unsafe_allow_html=True)
